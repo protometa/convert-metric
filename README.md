@@ -1,4 +1,3 @@
-
 Convert Metric
 ==============
 
@@ -41,7 +40,7 @@ convert('5 feet', 3) // returns '1.52 m'
 Fractional measurements are recognized. (Mixed fractions are not yet supported.)
 
 ```js
-convert('3/8 in') // returns '9.52 mm'
+convert('3/8 in', 3) // returns '9.52 mm'
 ```
 
 All recognized measurements in a string are converted.
