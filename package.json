@@ -1,0 +1,29 @@
+{
+  "name": "convert-metric",
+  "version": "0.1.0",
+  "description": "Converts a string with imperial units to metric units.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": [
+    "metric",
+    "imperial",
+    "unit",
+    "convert",
+    "string"
+  ],
+  "author": {
+    "name": "Luke Nimtz",
+    "email": "luke.nimtz@gmail.com",
+    "url": "www.lukenimtz.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/protometa/convert-metric.git"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "convert-units": "git://github.com/protometa/convert-units#c72b260e68adf71bff8e14e2ea88190893c910e9"
+  }
+}
