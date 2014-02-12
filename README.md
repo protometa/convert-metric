@@ -38,7 +38,7 @@ Full and plural unit names are recognized.
 convert('5 feet', 3) // returns '1.52 m'
 ```
 
-Fractional measurments are recognized. (Mixed fractions are not yet supported.)
+Fractional measurements are recognized. (Mixed fractions are not yet supported.)
 
 ```js
 convert('3/8 in') // returns '9.52 mm'
