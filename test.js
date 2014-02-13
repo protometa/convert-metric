@@ -1,7 +1,6 @@
 
 var assert = require('assert'),
-    metric = require('./index.js'),
-    input, expected, actual;
+    metric = require('./index.js');
 
 function tc (input, expected, sig, strict) { // conversion test case
 	if (input == undefined || expected == undefined) throw new Error('invalid test args')
