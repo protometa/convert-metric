@@ -56,7 +56,7 @@ Supported Conversions
 ---------------------
 - in to mm or cm
 - ft to cm or m
-- kg to lb
+- lb to kg
 
 
 
