@@ -8,12 +8,12 @@ function tc (input, expected, sig, strict) { // conversion test case
 	assert( actual == expected, '"'+input+'" -> "'+actual+'" expected: "'+expected+'"' );  
 }
   
-console.log('testing setup');
+console.log('testing setup...');
 
 assert( metric, 'metric not defined' );
 assert( typeof metric() == 'string', 'metric did not return a string' );
 
-console.log('testing conversions');
+console.log('testing conversions...');
 
 tc('2 ft','60.96 cm');
 tc('3ft','91.44 cm'); // test without space
@@ -31,6 +31,9 @@ tc('10.0 in x 4.5 in','25.4 cm x 11.4 cm',3,true);
 tc('21.83 in L x 6.3 in D x 6.97 in H','55.4 cm L x 16.0 cm D x 17.7 cm H',3,true);
 tc('89 lb','40.4 kg',3); // weight
 tc('12000 lb','5443 kg');
+
+console.log('bug fixes...');
+tc('12000 lb','5440 kg',3);
 
 
 console.log('testing passed!');
