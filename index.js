@@ -2,9 +2,11 @@
 var convert = require('convert-units');
 
 module.exports = function (str,sig,strict) {
-  var sig = sig || 4;
+  var sig = Math.floor(sig) || 4;
+  var str = str || '';
 
-  if (!str || typeof str != 'string') return ''; //throw 'metric requires a string argument'
+  if (typeof str != 'string') throw new TypeError('convert-metric requires a string argument');
+  if (sig < 0) throw new RangeError('sig digits cannot be negative');
 
   // find all labeled measurements in string
   var measurements = str.match(/\b\d+(\.|\/)?\d*\s?(ft|foot|feet|in|inch(es)?|lbs?|pounds?)\b/g);
@@ -51,11 +53,22 @@ module.exports = function (str,sig,strict) {
 
       resScalar = convert(orgScalar).from(orgUnit).to(resUnit);
 
-      // to string with significant digit precision
-      res = resScalar.toPrecision(sig);
+      if (!strict){
+        // if sig digits is not strict round to casual significant digit precision (trailing zeros not counted)
+        var exponent = Math.ceil( Math.log(resScalar) / Math.LN10 )
 
-      if (!strict){ // trim trailing zeros if sig digits is not strict
+        if (exponent > sig){
+          res = (Math.round( resScalar / Math.pow(10,exponent-sig) ) * Math.pow(10,exponent-sig)).toString()
+        } else {
+          res = resScalar.toPrecision(sig);
+        }
+
+        // and trim trailing decimal zeros
         res = res.match(/(\d+\.\d*[1-9]+|\d+)\.?0*$/)[1];
+
+      } else {
+        // to string with strict significant digit precision
+        res = resScalar.toPrecision(sig);
       }
 
       res += ' '+resUnit;

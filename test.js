@@ -1,17 +1,19 @@
 
 var assert = require('assert'),
-    metric = require('./index.js');
+    convert = require('./index.js');
 
 function tc (input, expected, sig, strict) { // conversion test case
-	if (input == undefined || expected == undefined) throw new Error('invalid test args')
-	var actual = metric(input,sig,strict);
+	if (input == undefined || expected == undefined) throw new Error('invalid test args');
+	var actual = convert(input,sig,strict);
 	assert( actual == expected, '"'+input+'" -> "'+actual+'" expected: "'+expected+'"' );  
 }
   
-console.log('testing setup...');
+console.log('testing api...');
 
-assert( metric, 'metric not defined' );
-assert( typeof metric() == 'string', 'metric did not return a string' );
+assert( typeof convert == 'function', 'convert is not a function' );
+assert( typeof convert() == 'string', 'convert did not return a string' );
+assert.throws( function(){ convert(12) }, 'convert-metric requires a string argument');
+assert.throws( function(){ convert('',-1) }, 'sig digits cannot be negative');
 
 console.log('testing conversions...');
 
@@ -32,8 +34,12 @@ tc('21.83 in L x 6.3 in D x 6.97 in H','55.4 cm L x 16.0 cm D x 17.7 cm H',3,tru
 tc('89 lb','40.4 kg',3); // weight
 tc('12000 lb','5443 kg');
 
-console.log('bug fixes...');
+console.log('testing bug #1...');
 tc('12000 lb','5440 kg',3);
+tc('12000 lb','5.44e+3 kg',3,true); // strict will use exponential notation if necessary
+tc('0.012 lb','0.00544 kg',3);
+tc('2 ft','61 cm',2);
+tc('12000 lb','5000 kg',1);
 
 
 console.log('testing passed!');
