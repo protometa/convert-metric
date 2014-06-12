@@ -24,6 +24,6 @@
   },
   "license": "ISC",
   "dependencies": {
-    "convert-units": "git://github.com/protometa/convert-units#c72b260e68adf71bff8e14e2ea88190893c910e9"
+    "convert-units": "0.0.7"
   }
 }
